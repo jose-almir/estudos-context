@@ -1,46 +1,28 @@
 import { useState } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { NavBar } from "./components/NavBar/NavBar";
 import { ThemeContext } from "./contexts/ThemeContext";
 import { Home } from "./pages/Home/Home";
-import { Login } from "./pages/Login/Login";
 import { Perfil } from "./pages/Perfil/Perfil";
-import { Root } from "./pages/Root";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/perfil",
-        element: <Perfil />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-    ],
-  },
-]);
+import { Login } from "./pages/Login/Login";
 
 export function App() {
-  const [theme, setTheme] = useState("light");
+  const [temaEscuro, setTemaEscuro] = useState(false);
 
   function alternarTema() {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    setTemaEscuro(!temaEscuro);
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, alternarTema }}>
-      <RouterProvider router={router} />
+    <ThemeContext.Provider value={{ temaEscuro, alternarTema }}>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeContext.Provider>
   );
 }

@@ -4,12 +4,11 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import "./Home.css";
 
 export function Home() {
-  const { theme } = useContext(ThemeContext);
+  const { temaEscuro } = useContext(ThemeContext);
 
-  const classesDiv =
-    theme === "dark" ? "bg-dark text-light" : "bg-light text-dark";
+  const classesDiv = temaEscuro ? "bg-dark text-light" : "bg-light text-dark";
 
-  const variantBtn = theme === "dark" ? "light" : "success";
+  const variantBtn = temaEscuro ? "light" : "success";
 
   return (
     <div className={classesDiv}>

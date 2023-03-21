@@ -5,12 +5,18 @@ import { ThemeContext } from "../../contexts/ThemeContext";
 import "./NavBar.css";
 
 export function NavBar() {
-  const { theme, alternarTema } = useContext(ThemeContext);
+  const { temaEscuro, alternarTema } = useContext(ThemeContext);
+
+  let defaultIcon = "https://cdn-icons-png.flaticon.com/512/3073/3073665.png";
+
+  if (temaEscuro) {
+    defaultIcon = "https://cdn-icons-png.flaticon.com/512/581/581601.png";
+  }
 
   return (
     <Navbar
-      bg={theme === "dark" ? "dark" : "success"}
-      variant={theme}
+      bg={temaEscuro ? "dark" : "success"}
+      variant={temaEscuro ? "dark" : "light"}
       expand="lg"
     >
       <Container fluid>
@@ -28,7 +34,7 @@ export function NavBar() {
               Login
             </Nav.Link>
             <Button variant="outline-light" onClick={alternarTema}>
-              Alternar
+              <img src={defaultIcon} width="16" alt="Icon" /> Alternar
             </Button>
           </Nav>
         </Navbar.Collapse>
