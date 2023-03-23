@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CompFilhoA } from "../CompFilhoA/CompFilhoA";
 import { CompFilhoB } from "../CompFilhoB/CompFilhoB";
+import { BatataContext } from "../../contexts/BatataContext";
 import "./CompPai.css";
 
 export function CompPai() {
@@ -11,9 +12,7 @@ export function CompPai() {
   function repetir() {
     setBatata(batata + "a");
   }
-  // Props drilling = quando temos uma hierarquia
-  // de componentes muito extensa para passar props
-  // em cada componente
+
   return (
     <div className="pai">
       <h3>PAI</h3>
@@ -24,8 +23,11 @@ export function CompPai() {
         <b>Valor: </b>
         {batata}
       </p>
-      <CompFilhoA valor={batata} />
-      <CompFilhoB />
+      {/* Fornece o "value" para a hierarquia */}
+      <BatataContext.Provider value={batata}>
+        <CompFilhoA />
+        <CompFilhoB />
+      </BatataContext.Provider>
     </div>
   );
 }
