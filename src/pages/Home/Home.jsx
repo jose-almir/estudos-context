@@ -1,5 +1,9 @@
 import "./Home.css";
 
 export function Home() {
-  return <></>;
+  return (
+    <div>
+      <h1>Home</h1>
+    </div>
+  );
 }
